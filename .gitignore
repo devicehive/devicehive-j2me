@@ -1,2 +1,8 @@
 # externals
 /externals
+/examples/EmbeddedApplication/nbproject/private/
+/src/framework/nbproject/private/
+/src/framework/dist/
+/src/framework/build/
+/examples/EmbeddedApplication/dist/
+*.class
