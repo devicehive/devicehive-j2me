@@ -18,7 +18,7 @@ public class PollService implements Runnable {
     }
 
     DeviceData device;
-    String lastCommandTimestamp = null;
+    public String lastCommandTimestamp = null;
     Listener listener;
     boolean isRun = false;
     Thread thread;

@@ -33,7 +33,7 @@ public class RemoteDevice {
     static final int DT_OBJECT  = 16;   // object, variable length.
 
     // data layout
-    static class Layout {
+    public static class Layout {
         private Vector content = new Vector();
         public String name;         // layout name
         public int intent;          // intent number
@@ -72,7 +72,7 @@ public class RemoteDevice {
     private Hashtable intentByName = new Hashtable();
 
     // constructor
-    RemoteDevice() {
+    public RemoteDevice() {
         Layout regReq = new Layout();
         regReq.add(new Layout.Element("data", DT_NULL));
         registerLayout(BinFrame.INTENT_REGISTRATION_REQUEST, "reg_req", regReq);
@@ -89,7 +89,7 @@ public class RemoteDevice {
     }
 
     // handle register info
-    void handleRegisterResponse(JSONObject jval) throws Exception {
+    public void handleRegisterResponse(JSONObject jval) throws Exception {
         if (true) { // update commands
             JSONArray jcommands = jval.getJSONArray("commands");
             for (int i = 0; i < jcommands.length(); ++i) {
@@ -203,12 +203,12 @@ public class RemoteDevice {
 
 
     // find layout by intent
-    Layout findLayoutByIntent(int intent) {
+    public Layout findLayoutByIntent(int intent) {
         return (Layout)layoutByIntent.get(new Integer(intent));
     }
 
     // find intent by name
-    int findIntentByName(String name) {
+    public int findIntentByName(String name) {
         Object val = intentByName.get(name);
         if (val != null) {
             return ((Integer)val).intValue();
@@ -216,7 +216,7 @@ public class RemoteDevice {
         return -1; // not found
     }
 
-    void registerLayout(int intent, String name, Layout layout) {
+    public void registerLayout(int intent, String name, Layout layout) {
         Integer key = new Integer(intent);
         layoutByIntent.put(key, layout);
         layout.name = name;
@@ -230,7 +230,7 @@ public class RemoteDevice {
     /**
      * Convert binary data to JSON value.
      */
-    static Object bin2json(DataInputStream bs, Layout layout) throws Exception {
+    public static Object bin2json(DataInputStream bs, Layout layout) throws Exception {
         Object jval = null;
 
         for (Enumeration e = layout.elements(); e.hasMoreElements(); ) {
@@ -303,7 +303,7 @@ public class RemoteDevice {
     /**
      * Convert JSON value to binary data.
      */
-    static void json2bin(Object jval, DataOutputStream bs, Layout layout) throws Exception {
+    public static void json2bin(Object jval, DataOutputStream bs, Layout layout) throws Exception {
         for (Enumeration e = layout.elements(); e.hasMoreElements(); ) {
             Layout.Element elem = (Layout.Element)e.nextElement();
 

@@ -7,10 +7,10 @@ import org.json.me.JSONObject;
  * DeviceHive command wrapper class.
  */
 public class Command {
-    long id;            // command identifier
-    String name;        // command name
-    String timestamp;   // command timestamp
-    Object params;      // custom parameters, may be null
+    public long id;            // command identifier
+    public String name;        // command name
+    public String timestamp;   // command timestamp
+    public Object params;      // custom parameters, may be null
 
 
     /**

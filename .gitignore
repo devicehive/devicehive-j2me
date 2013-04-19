@@ -6,3 +6,9 @@
 /src/framework/build/
 /examples/EmbeddedApplication/dist/
 *.class
+/examples/SimpleGateway/nbproject/private/
+/examples/SimpleGateway/build/
+/examples/SimpleGateway/dist/
+/src/framework/nbproject/*.DS_Store
+
+/*.DS_Store

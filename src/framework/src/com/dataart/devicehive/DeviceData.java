@@ -8,23 +8,23 @@ import org.json.me.JSONObject;
  *
  */
 public class DeviceData {
-    String id;
-    String name;
-    String key;
-    String status;
-    JSONObject data;
+    public String id;
+    public String name;
+    public String key;
+    public String status;
+    public JSONObject data;
 
-    DeviceClass deviceClass = new DeviceClass();
-    Network network = new Network();
-    Equipment[] equipment;
+    public DeviceClass deviceClass = new DeviceClass();
+    public Network network = new Network();
+    public Equipment[] equipment;
 
-    static class DeviceClass {
-        String name;
-        String version;
-        boolean isPermanent;
-        int offlineTimeout;
+    public static class DeviceClass {
+        public String name;
+        public String version;
+        public boolean isPermanent;
+        public int offlineTimeout;
 
-        JSONObject json() throws JSONException {
+        public JSONObject json() throws JSONException {
             JSONObject jclass = new JSONObject();
             jclass.put("name", name);
             jclass.put("version", version);
@@ -36,12 +36,12 @@ public class DeviceData {
         }
     }
 
-    static class Network {
-        String name;
-        String key;
-        String description;
+    public static class Network {
+        public String name;
+        public String key;
+        public String description;
 
-        JSONObject json() throws JSONException {
+        public JSONObject json() throws JSONException {
             JSONObject jnet = new JSONObject();
             jnet.put("name", name);
             if (key != null && key.length() > 0) {
@@ -52,12 +52,12 @@ public class DeviceData {
         }
     }
 
-    static class Equipment {
-        String code;
-        String name;
-        String type;
+    public  static class Equipment {
+        public String code;
+        public String name;
+        public String type;
 
-        JSONObject json() throws JSONException {
+        public JSONObject json() throws JSONException {
             JSONObject jeq = new JSONObject();
             jeq.put("code", code);
             jeq.put("name", name);
@@ -69,7 +69,7 @@ public class DeviceData {
     /**
      * Convert to JSON
      */
-    JSONObject json() throws JSONException {
+    public JSONObject json() throws JSONException {
         JSONObject jdev = new JSONObject();
 
         if (name != null && name.length() > 0) {
@@ -101,5 +101,6 @@ public class DeviceData {
 
         return jdev;
     }
+
 }
 
