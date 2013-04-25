@@ -1,5 +1,5 @@
-DeviceHive C++ framework
-========================
+DeviceHive J2ME framework
+=========================
 
 [DeviceHive]: http://devicehive.com "DeviceHive framework"
 [DataArt]: http://dataart.com "DataArt"

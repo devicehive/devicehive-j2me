@@ -19,6 +19,9 @@ public class RestClient {
     private String ua;
 
     public RestClient() {
+        if(Settings.SERVER_URL == null) {
+            throw new IllegalArgumentException("Settings.SERVER_URL can't be null");
+        }
     }
 
     public RestClient(String userid, String password) {
@@ -43,10 +46,6 @@ public class RestClient {
             conn.setRequestProperty("Auth-DeviceKey", dev.key);
         }
 
-        // set HTTP basic authentification
-        if (true && userid != null && password != null) {
-            conn.setRequestProperty("Authorization", "Basic " + BasicAuth.encode(userid, password));
-        }
     }
 
     public HttpConnection getConnection(String url, DeviceData dev) throws IOException {
@@ -130,7 +129,8 @@ public class RestClient {
 
         } catch (Exception e) {
 
-            // TODO bad style
+           
+            e.printStackTrace();
             responseMessage.append("ERROR: ");
         } finally {
             try {
