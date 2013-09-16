@@ -22,6 +22,7 @@ public class RestClient {
         if(Settings.SERVER_URL == null) {
             throw new IllegalArgumentException("Settings.SERVER_URL can't be null");
         }
+        
     }
 
     public RestClient(String userid, String password) {
@@ -162,6 +163,7 @@ public class RestClient {
 
     public String post(String url, String data, int method, DeviceData dev) throws IOException {
 
+
         HttpConnection hcon = null;
         DataInputStream dis = null;
         DataOutputStream dos = null;
@@ -207,17 +209,19 @@ public class RestClient {
                 }
 
                 // obtain DataInputStream for receiving server response
-                dis = new DataInputStream(hcon.openInputStream());
-                // retrieve the response from server
-                int ch;
-                while ((ch = dis.read()) != -1) {
-                    responseMessage.append((char) ch);
-                }// end while( ( ch = dis.read() ) != -1 ) {
-                // check status code
                 int status = hcon.getResponseCode();
                 switch (status) {
                     case HttpConnection.HTTP_OK: // Success!
                     case HttpConnection.HTTP_CREATED:
+                        dis = new DataInputStream(hcon.openInputStream());
+                        // retrieve the response from server
+                        int ch;
+                        while ((ch = dis.read()) != -1) {
+                            responseMessage.append((char) ch);
+                        }// end while( ( ch = dis.read() ) != -1 ) {
+                        // check status code
+                        break;
+                    case HttpConnection.HTTP_NO_CONTENT:
                         break;
                     case HttpConnection.HTTP_TEMP_REDIRECT:
                     case HttpConnection.HTTP_MOVED_TEMP:
@@ -250,7 +254,7 @@ public class RestClient {
             }
         } catch (Exception e) {
 
-            responseMessage.append("ERROR");
+            responseMessage.append("RestClient.post: " + url + " , message: " + e.getMessage());
         } finally {
             // free up i/o streams and http connection
             try {
@@ -264,6 +268,7 @@ public class RestClient {
                     dos.close();
                 }
             } catch (IOException ioe) {
+
             }// end try/catch
         }// end try/catch/finally
         return responseMessage.toString();
@@ -297,6 +302,21 @@ public class RestClient {
 
         DebugUtils.log("insertNotification: " + res);
 
+        return res;
+    }
+	
+	public static String getDeviceInfo(DeviceData dev) {
+        String res = "";
+
+        RestClient rc = new RestClient(null, null);
+        try {
+            final String url = Settings.SERVER_URL
+                    + "/device/" + dev.id;
+            res = rc.get(url, dev);
+        } catch (IOException ex) {
+
+        }
+        DebugUtils.log("got device info " + res);
         return res;
     }
 

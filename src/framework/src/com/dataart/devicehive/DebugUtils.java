@@ -54,7 +54,7 @@ public class DebugUtils {
     
     public static void diagnosticLogError(String s, Throwable thr) {
         if (Settings.DIAGNOSTIC_LOG_ENABLED ) {
-            if(isLogTime) {
+            if( Settings.LOG_RUN_DEALY == 0 || isLogTime) {
                 logImpl("IOE diagnostic exception: " + s + " error: " + thr.getMessage());
             }
             else {

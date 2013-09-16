@@ -41,6 +41,14 @@ public class PollService implements Runnable {
                         lastCommandTimestamp = commands[i].timestamp;
                     }
                 }
+                
+                try {
+                    Thread.sleep(100);
+                }
+                catch(Throwable thr) {
+                    
+                }
+                
             } catch (Exception ex) {
 
                 DebugUtils.diagnosticLog("PollService run cycle  error: " + ex.getMessage());

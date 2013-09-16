@@ -10,7 +10,7 @@ public class Command {
     public long id;            // command identifier
     public String name;        // command name
     public String timestamp;   // command timestamp
-    public Object params;      // custom parameters, may be null
+    public JSONObject params;      // custom parameters, may be null
 
 
     /**
@@ -23,7 +23,7 @@ public class Command {
         this.id         = jcmd.getLong("id");
         this.name       = jcmd.getString("command");
         this.timestamp  = jcmd.getString("timestamp");
-        this.params     = jcmd.opt("parameters");
+        this.params     = jcmd.optJSONObject("parameters");
     }
 
 
